@@ -119,3 +119,10 @@ Q_IMPORT_PLUGIN(winampplugin);
 #ifdef TC_PSIFILE
 Q_IMPORT_PLUGIN(psifileplugin);
 #endif
+
+#ifdef TC_MPRIS
+Q_IMPORT_PLUGIN(amarokplugin);
+Q_IMPORT_PLUGIN(audaciousplugin);
+Q_IMPORT_PLUGIN(bmpxplugin);
+Q_IMPORT_PLUGIN(xmms2plugin);
+#endif

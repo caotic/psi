@@ -82,3 +82,24 @@ tc_psifile {
 		$$PSIFILE_PLUGIN_PATH/psifilecontroller.cpp \
 		$$PSIFILE_PLUGIN_PATH/psifileplugin.cpp
 }
+
+# MPRIS clients
+dbus {
+	HEADERS += $$PWD/mpristunecontroller.h
+	SOURCES += $$PWD/mpristunecontroller.cpp
+
+	DEFINES += TC_MPRIS
+
+	AMAROK_PLUGIN_PATH = $$PWD/plugins/amarok
+	SOURCES += $$PWD/plugins/amarok/amarokplugin.cpp
+
+	AUDACIOUS_PLUGIN_PATH = $$PWD/plugins/audacious
+	SOURCES += $$PWD/plugins/audacious/audaciousplugin.cpp
+
+	BMPX_PLUGIN_PATH = $$PWD/plugins/bmpx
+	SOURCES += $$PWD/plugins/bmpx/bmpxplugin.cpp
+
+	XMMS2_PLUGIN_PATH = $$PWD/plugins/xmms2
+	SOURCES += $$PWD/plugins/xmms2/xmms2plugin.cpp
+}
+
