@@ -119,3 +119,7 @@ Q_IMPORT_PLUGIN(winampplugin);
 #ifdef TC_PSIFILE
 Q_IMPORT_PLUGIN(psifileplugin);
 #endif
+
+#ifdef TC_MPRIS
+Q_IMPORT_PLUGIN(mprisplugin);
+#endif
