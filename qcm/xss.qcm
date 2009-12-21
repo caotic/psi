@@ -34,17 +34,27 @@ public:
 			"    XScreenSaverQueryExtension(NULL, NULL, NULL);\n"
 			"    return 0;\n"
 			"}\n";
-		QString proextra = "CONFIG += x11\n";
 
-		if (!conf->doCompileAndLink(str, QStringList(), "-lXss", proextra, NULL)) {
+		QStringList incs;
+		QString libs;
+		QString version;
+		QString other;
+		
+		if (!conf->findPkgConfig("xscrnsaver", VersionAny, "", &version, &incs, &libs, &other)) {
+			libs = "";
+			QString proextra = "CONFIG += x11\n";
 			if (!conf->doCompileAndLink(str, QStringList(), QString(), proextra, NULL)) {
-				return false;
+				libs = "-lXss";
+				if (!conf->doCompileAndLink(str, QStringList(), libs, proextra, NULL)) {
+					return false;
+				}
 			}
 		}
-		else {
-			conf->addLib("-lXss");
-		}
-		
+
+		if (!libs.isEmpty()) {
+			conf->addLib(libs);
+		}	
+	
 		conf->addDefine("HAVE_XSS");
 		return true;
 #endif
