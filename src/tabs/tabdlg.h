@@ -37,6 +37,7 @@ class QPushButton;
 class QMenu;
 class QString;
 class QContextMenuEvent;
+class QActionGroup;
 class PsiTabWidget;
 class TabManager;
 

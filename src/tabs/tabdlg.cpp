@@ -32,6 +32,7 @@
 #include <QKeyEvent>
 #include <QDropEvent>
 #include <QCloseEvent>
+#include <QSignalMapper>
 
 #include "psitabwidget.h"
 #include "psioptions.h"
@@ -170,6 +171,17 @@ TabDlg::TabDlg(TabManager* tabManager, QSize size, TabDlgDelegate *delegate)
 	connect(act_next_,SIGNAL(triggered()), SLOT(nextTab()));
 
 	setShortcuts();
+
+	QSignalMapper* activateTabMapper_ = new QSignalMapper(this);
+	connect(activateTabMapper_, SIGNAL(mapped(int)), tabWidget_, SLOT(setCurrentPage(int)));
+	for (int i = 0; i < 10; ++i) {
+		QAction* action = new QAction(this);
+		connect(action, SIGNAL(triggered()), activateTabMapper_, SLOT(map()));
+		action->setShortcuts(QList<QKeySequence>() << QKeySequence(QString("Ctrl+%1").arg(i))
+		                                           << QKeySequence(QString("Alt+%1").arg(i)));
+		activateTabMapper_->setMapping(action, (i > 0 ? i : 10) - 1);
+		addAction(action);
+	}
 
 	if (size.isValid()) {
 		resize(size);
